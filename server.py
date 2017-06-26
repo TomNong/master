@@ -130,8 +130,9 @@ def get_result():
       if task_ID in TASK_MAP:
         r = requests.get("http://" + TASK_MAP[task_ID] + ":" + str(RESULTPORT) + "/result", headers=headers, json = request_json)
         print "taskmap"
-        print r.text
-	del TASK_MAP[task_ID]
+        print json.load(r.text)
+	if json.load(r.text)["isResult"] == "true":
+	  del TASK_MAP[task_ID]
         return r.text
       #elif task_ID != " " or task_ID != "":
       return json.dumps({"result": "String processing...", 'isResult': 'false'})

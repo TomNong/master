@@ -131,6 +131,7 @@ def get_result():
         r = requests.get("http://" + TASK_MAP[task_ID] + ":" + str(RESULTPORT) + "/result", headers=headers, json = request_json)
         print "taskmap"
         print r.text
+	del TASK_MAP[task_ID]
         return r.text
       #elif task_ID != " " or task_ID != "":
       return json.dumps({"result": "String processing...", 'isResult': 'false'})
